@@ -202,38 +202,6 @@ cmd({
         }
     )
     //---------------------------------------------------------------------------
-    cmd({
-        pattern: "circle",
-        alias: ["circlestic","circlesticker","cs"],
-        desc: "Makes sticker of replied image/video.",
-        category: "sticker",
-filename: __filename,
-        use: '<reply to any image/video.>'
-    },
-    async(Void, citel, text) => {
-        if (!citel.quoted) return citel.reply(`*Reply To any Image or video Sir.*`);
-      //console.log("Quoted Data here : ",citel.quoted);
-        let mime = citel.quoted.mtype
-        pack = Config.packname
-        author = Config.author
-       if (mime =="imageMessage" || mime =="stickerMessage") {
-            let media = await citel.quoted.download();
-            //citel.reply("*Processing Your request*");
-            let sticker = new Sticker(media, {
-                pack: pack, // The pack name
-                author: author, // The author name
-                type: StickerTypes.CIRCLE ,
-                categories: ["🤩", "🎉"], // The sticker category
-                id: "12345", // The sticker id
-                quality: 75, // The quality of the output file
-            });
-            const buffer = await sticker.toBuffer();
-            return Void.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel });
-        }else return citel.reply("*Uhh,Please reply to any image*");
-
-    }
-)
-//---------------------------------------------------------------------------
 cmd({
         pattern: "crop",
         alias: ["cropstic","csticker","cropsticker"],
